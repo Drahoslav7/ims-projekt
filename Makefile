@@ -22,4 +22,4 @@ clear:
 	rm -r bin
 
 pack:
-	tar -cvzf 06_xbalvi00_xbedna55.tar.gz Makefile src/* dokumentace.pdf
+	tar -cvzf 06_xbalvi00_xbedna55.tar.gz Makefile src/* *.pdf

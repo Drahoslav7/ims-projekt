@@ -78,7 +78,9 @@ public:
 	}
 
 	void Activate(){
-		Event::Activate(schedule[scheduleIndex].time);
+		int delay =  0;
+		// delay += Exponential(5);
+		Event::Activate(schedule[scheduleIndex].time + delay);
 	}
 	void Activate(t_time time){
 		Event::Activate(time);
