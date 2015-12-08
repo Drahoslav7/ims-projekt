@@ -7,7 +7,7 @@
  * Drahoslav Bednář (xbedna55)
  */
 
-#include "simlib/simlib.h"
+#include "simlib.h"
 #include <iostream>
 #include <string>
 #include <vector>
