@@ -1,5 +1,5 @@
 
-#define TIME(h,m) (60*(h)+(m))
+#define TIME(h,m) ((60*(h))+(m))
 
 typedef double t_time;
 
@@ -50,7 +50,6 @@ const std::vector<ScheduleRecord> scheduleStart = {
 	{TIME(21,28), 340},
 	{TIME(22,48), 340},
 
-	
 };
 
 const std::vector<ScheduleRecord> schedulePass = {

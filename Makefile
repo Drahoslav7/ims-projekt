@@ -12,7 +12,7 @@ NAME := simulation
 build:
 	make -C src/
 
-run:
+run: build
 	./bin/$(NAME)
 
 
