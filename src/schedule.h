@@ -16,8 +16,8 @@ enum TrainType : int {
 struct ScheduleRecord
 {
 	t_time time;
-	TrainType type; 
 	int waitTime;
+	TrainType type; 
 
 	friend bool operator<(const ScheduleRecord& x, const ScheduleRecord& y){
 		return (x.time < y.time);

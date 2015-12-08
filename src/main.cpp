@@ -10,7 +10,6 @@
 #include "simlib.h"
 #include <iostream>
 #include <string>
-#include <vector>
 #include <algorithm>
 #include "schedule.h"
 
@@ -29,9 +28,11 @@ class Train : public Process {
 public:
 	// TrainType type;
 	t_time waitTime;
+	TrainType type;
 
-	Train(){
-
+	Train(t_time waitTime,	TrainType type){
+		this->waitTime = waitTime;
+		this->type = type;
 	}
 
 	void Behavior(){
@@ -39,9 +40,9 @@ public:
 		Enter(mainStation, 1);
 		// mainStation.Enter(this,1);
 
-		// Wait(waitTime);
+		Wait(waitTime);
 		
-		Wait(10);
+		// Wait(10);
 
 		Leave(mainStation, 1);
 		// mainStation.Leave(1);
@@ -79,7 +80,7 @@ public:
 	}
 
 	void Behavior(){
-		(new Train())->Activate();
+		(new Train(schedule[scheduleIndex].waitTime, schedule[scheduleIndex].type))->Activate();
 		scheduleIndex++;
 		if(scheduleIndex >= schedule.size()){
 			return;
@@ -95,9 +96,6 @@ public:
 
 
 
-Generator startingTrainsGen(scheduleStart);
-Generator passingTrainsGen(schedulePass);
-Generator endingTrainsGen(scheduleEnd);
 
 
 /** Hlavní nádraží **/
@@ -107,11 +105,22 @@ int main(int argc, char const *argv[])
 {
 	DebugON();
 
+	std::vector<Generator*> generators;
+
+	for(auto &line : schedule) {
+		generators.push_back(new Generator(line.second));
+	}
+
 
 	Print("Model dopravniho uzlu\n");
 	SetOutput("model.out");
 	Init(0, TIME(23,59));        // whole day
-	startingTrainsGen.Activate();
+
+	for(auto &generator : generators) {
+		generator->Activate();
+	}
+
+	// startingTrainsGen.Activate();
 	// passingTrainsGen.Activate();
 	// endingTrainsGen.Activate();
 	Run();                     // simulation
