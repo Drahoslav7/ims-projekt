@@ -36,6 +36,7 @@ public:
 	}
 
 	void Behavior(){
+		Print(Time);
 		Table(Time);
 		Enter(mainStation, 1);
 		// mainStation.Enter(this,1);
@@ -73,11 +74,21 @@ public:
 		sort(schedule.begin(), schedule.end());
 		scheduleIndex = 0;
 		// this->type = type;
+
 	}
 
 	void Activate(){
 		Event::Activate(schedule[scheduleIndex].time);
 	}
+	void Activate(t_time time){
+		Event::Activate(time);
+	}
+
+	// void Start(){
+	// 	for(auto &record : schedule) {
+	// 		Event::Activate(record.time);
+	// 	}
+	// }
 
 	void Behavior(){
 		(new Train(schedule[scheduleIndex].waitTime, schedule[scheduleIndex].type))->Activate();
@@ -103,27 +114,27 @@ public:
 /** MAIN **/
 int main(int argc, char const *argv[])
 {
-	DebugON();
+	// DebugON();
 
 	std::vector<Generator*> generators;
 
+	Generator * genptr;
 	for(auto &line : schedule) {
-		generators.push_back(new Generator(line.second));
+		genptr = new Generator(line.second);
+		generators.push_back(genptr);
 	}
 
 
 	Print("Model dopravniho uzlu\n");
 	SetOutput("model.out");
-	
+
 	Init(0, TIME(23,59));        // whole day
 
-	for(auto &generator : generators) {
+	for(auto generator : generators) {
+		// generator->Start();
 		generator->Activate();
 	}
 
-	// startingTrainsGen.Activate();
-	// passingTrainsGen.Activate();
-	// endingTrainsGen.Activate();
 	Run();                     // simulation
 	// Box.Output();              // print of results
 	Table.Output();
