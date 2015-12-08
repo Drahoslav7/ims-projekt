@@ -13,7 +13,7 @@ build:
 	make -C src/
 
 run:
-	./bin/($NAME)
+	./bin/$(NAME)
 
 
 
