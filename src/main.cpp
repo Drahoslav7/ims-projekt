@@ -7,7 +7,7 @@
  * Drahoslav Bednář (xbedna55)
  */
 
-#include "simlib/simlib.h"
+#include "simlib.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,8 +16,9 @@
 
 using namespace std;
 
-Histogram Table("Table",0,60,24);
 
+Histogram Table("Table",0,60,24);
+Store mainStation("main station", 10);
 
 
 ////////////////////////////
@@ -40,17 +41,31 @@ public:
 
 	void Behavior(){
 		Table(Time);
-	}
+		Enter(mainStation, 1);
+		// mainStation.Enter(this,1);
+
+		// switch(type){
+		// 	case TYPE_START:
+				Wait(10);
+		// 		break;
+		// 	case TYPE_END:
+		// 		Wait(5);
+		// 		break;
+		// 	case TYPE_PASS:
+		// 		Wait(5);
+		// 		break;
+		// }
+		Leave(mainStation, 1);
+		// mainStation.Leave(1);
+
+	};
 };
 
 
-class Station : public Facility {
+class Station : public Store {
 public:
-	int numberOftracks;
-
-	Station(const char* name, int n) : Facility(name) {
-		numberOftracks = n;
-	}
+	// Station(const char* name, int n) : Store(name, n) {
+	// }
 
 };
 
@@ -97,7 +112,6 @@ Generator endingTrainsGen(scheduleEnd, TYPE_END);
 
 
 /** Hlavní nádraží **/
-Station mainStation("main station", 10);
 
 /** MAIN **/
 int main(int argc, char const *argv[])
