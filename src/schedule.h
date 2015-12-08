@@ -1,3 +1,6 @@
+#include <map>
+#include <vector>
+#include <algorithm>
 
 #define TIME(h,m) ((60*(h))+(m))
 
@@ -324,6 +327,50 @@ std::map<int, std::vector<ScheduleRecord> > schedule = {
 		}		
 	},
 	{244, {
+		{TIME(5,02), 10, TYPE_START},
+		{TIME(5,49), 10, TYPE_START},
+		{TIME(6,49), 10, TYPE_START},
+		{TIME(7,49), 10, TYPE_START},
+		{TIME(8,49), 10, TYPE_START},
+		{TIME(9,54), 10, TYPE_START},
+		{TIME(10,54), 10, TYPE_START},
+		{TIME(11,54), 10, TYPE_START},
+		{TIME(12,54), 10, TYPE_START},
+		{TIME(13,54), 10, TYPE_START},
+		{TIME(14,23), 10, TYPE_START},
+		{TIME(15,30), 10, TYPE_START},
+		{TIME(15,54), 10, TYPE_START},
+		{TIME(16,23), 10, TYPE_START},
+		{TIME(16,54), 10, TYPE_START},
+		{TIME(17,28), 10, TYPE_START},
+		{TIME(17,54), 10, TYPE_START},
+		{TIME(18,54), 10, TYPE_START},
+		{TIME(19,54), 10, TYPE_START},
+		{TIME(20,54), 10, TYPE_START},
+		{TIME(21,54), 10, TYPE_START},
+		{TIME(22,54), 10, TYPE_START},
+		{TIME(4,55), 10, TYPE_END},
+		{TIME(5,31), 10, TYPE_END},
+		{TIME(6,01), 10, TYPE_END},
+		{TIME(6,31), 10, TYPE_END},
+		{TIME(7,01), 10, TYPE_END},
+		{TIME(7,29), 10, TYPE_END},
+		{TIME(8,01), 10, TYPE_END},
+		{TIME(8,25), 10, TYPE_END},
+		{TIME(9,01), 10, TYPE_END},
+		{TIME(10,04), 10, TYPE_END},
+		{TIME(11,04), 10, TYPE_END},
+		{TIME(12,04), 10, TYPE_END},
+		{TIME(13,04), 10, TYPE_END},
+		{TIME(14,04), 10, TYPE_END},
+		{TIME(15,04), 10, TYPE_END},
+		{TIME(16,04), 10, TYPE_END},
+		{TIME(17,04), 10, TYPE_END},
+		{TIME(18,04), 10, TYPE_END},
+		{TIME(19,04), 10, TYPE_END},
+		{TIME(20,04), 10, TYPE_END},
+		{TIME(21,04), 10, TYPE_END},
+		
 		
 		}
 	},
