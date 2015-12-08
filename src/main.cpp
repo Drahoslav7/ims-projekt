@@ -40,7 +40,7 @@ public:
 		Enter(mainStation, 1);
 		// mainStation.Enter(this,1);
 
-		Wait(waitTime);
+		// Wait(waitTime);
 		
 		// Wait(10);
 
@@ -114,6 +114,7 @@ int main(int argc, char const *argv[])
 
 	Print("Model dopravniho uzlu\n");
 	SetOutput("model.out");
+	
 	Init(0, TIME(23,59));        // whole day
 
 	for(auto &generator : generators) {
