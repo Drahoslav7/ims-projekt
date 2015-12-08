@@ -24,19 +24,14 @@ Store mainStation("main station", 10);
 ////////////////////////////
 /// DECLARATIONS
 
-enum TrainType : int {
-	TYPE_START,
-	TYPE_PASS,
-	TYPE_END,
-};
-
 
 class Train : public Process {
 public:
-	TrainType type;
+	// TrainType type;
+	t_time waitTime;
 
-	Train(TrainType t){
-		type = t;
+	Train(){
+
 	}
 
 	void Behavior(){
@@ -44,17 +39,10 @@ public:
 		Enter(mainStation, 1);
 		// mainStation.Enter(this,1);
 
-		// switch(type){
-		// 	case TYPE_START:
-				Wait(10);
-		// 		break;
-		// 	case TYPE_END:
-		// 		Wait(5);
-		// 		break;
-		// 	case TYPE_PASS:
-		// 		Wait(5);
-		// 		break;
-		// }
+		// Wait(waitTime);
+		
+		Wait(10);
+
 		Leave(mainStation, 1);
 		// mainStation.Leave(1);
 
@@ -75,28 +63,29 @@ class Generator : public Event {
 private:
 	int scheduleIndex;
 	vector<ScheduleRecord> schedule;
-	TrainType type;
+	// TrainType type;
 
 public:
 
-	Generator(vector<ScheduleRecord> records, TrainType type) {
+	Generator(vector<ScheduleRecord> records) {
 		schedule = records;
-		// sort(schedule.begin(), schedule.end());
+		sort(schedule.begin(), schedule.end());
 		scheduleIndex = 0;
-		this->type = type;
+		// this->type = type;
 	}
 
 	void Activate(){
-		Event::Activate(schedule[scheduleIndex++].time);
+		Event::Activate(schedule[scheduleIndex].time);
 	}
 
 	void Behavior(){
-		(new Train(type))->Activate();
+		(new Train())->Activate();
+		scheduleIndex++;
 		if(scheduleIndex >= schedule.size()){
 			return;
 		}
 
-		Event::Activate(schedule[scheduleIndex++].time);
+		Event::Activate(schedule[scheduleIndex].time);
 
 	}
 };
@@ -106,9 +95,9 @@ public:
 
 
 
-Generator startingTrainsGen(scheduleStart, TYPE_START);
-Generator passingTrainsGen(schedulePass, TYPE_PASS);
-Generator endingTrainsGen(scheduleEnd, TYPE_END);
+Generator startingTrainsGen(scheduleStart);
+Generator passingTrainsGen(schedulePass);
+Generator endingTrainsGen(scheduleEnd);
 
 
 /** Hlavní nádraží **/
@@ -116,6 +105,9 @@ Generator endingTrainsGen(scheduleEnd, TYPE_END);
 /** MAIN **/
 int main(int argc, char const *argv[])
 {
+	DebugON();
+
+
 	Print("Model dopravniho uzlu\n");
 	SetOutput("model.out");
 	Init(0, TIME(23,59));        // whole day
